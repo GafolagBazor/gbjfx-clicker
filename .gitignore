@@ -1,0 +1,8 @@
+.gradle/
+build/
+.idea/
+*.obj
+*.res
+*.pdb
+*.exe
+clicker/javaJar/
