@@ -1,1 +1,2 @@
-https://repo.maven.apache.org/maven2/org/openjfx
+https://repo.maven.apache.org/maven2/org/openjfx/
+https://repo.maven.apache.org/maven2/com/google/code/gson/
