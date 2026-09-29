@@ -15,8 +15,21 @@
 <div class="card">
     <p>Кликер, кликай!</p>
     <div id="counter">0</div>
-    <button onclick="incrementCounter(event)">Клик</button>
+    <button id="click-btn" onclick="incrementCounter(event)">Клик</button>
+    <div class="upgrade-container">
+        <p class="multiplier-text">Множитель клика: <span id="multiplier-val">x1</span></p>
+        <button id="upgrade-btn" onclick="buyUpgrade()">
+            Купить Апгрейд (Цена: <span id="upgrade-cost-val">50</span>)
+        </button>
+        <div class="idle-container" style="margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 15px;">
+            <p class="idle-text" style="font-size: 14px; color: #94a3b8; margin-bottom: 12px;">Пассивный доход: <span id="idle-val" style="color: #10b981; font-weight: 700;">0/сек</span></p>
+            <button id="idle-btn" onclick="buyIdle()" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #fff; border: none; padding: 14px 28px; font-size: 16px; font-weight: 600; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); transition: all 0.2s ease; outline: none; width: 100%;">
+                Купить Шахту (Цена: <span id="idle-cost-val">100</span>)
+            </button>
+        </div>
+    </div>
 </div>
+
 <script src="js.js"></script>
 </body>
 </html>
