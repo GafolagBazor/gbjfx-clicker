@@ -1,4 +1,6 @@
 let count = 0;
+let clickMultiplier = 1;
+let upgradeCost = 50;
 
 function loadSessions(base64Json) {
     const select = document.getElementById('session-select');
@@ -26,11 +28,30 @@ function loadSessions(base64Json) {
     });
 }
 
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
+function updateCounterStyle(length) {
+    const counter = document.getElementById('counter');
+    if (length > 15) {
+        counter.style.fontSize = "32px";
+    } else if (length > 11) {
+        counter.style.fontSize = "42px";
+    } else if (length > 8) {
+        counter.style.fontSize = "54px";
+    } else {
+        counter.style.fontSize = "80px";
+    }
+}
+
 function incrementCounter(event) {
-    count++;
+    count += clickMultiplier;
 
     const counter = document.getElementById('counter');
-    counter.innerText = count;
+    const formatted = formatNumber(count);
+    counter.innerText = formatted;
+    updateCounterStyle(formatted.length);
 
     counter.classList.remove('pulse');
     void counter.offsetWidth;
@@ -44,31 +65,25 @@ function incrementCounter(event) {
     }
 }
 
-function createParticles(x, y) {
-    const pCount = 15;
-    for (let i = 0; i < pCount; i++) {
-        const p = document.createElement('div');
-        p.classList.add('particle');
+function buyUpgrade() {
+    if (count >= upgradeCost) {
+        count -= upgradeCost;
+        clickMultiplier *= 2;
+        upgradeCost *= 2;
 
-        const size = Math.random() * 8 + 4;
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
+        const formattedCount = formatNumber(count);
+        const counter = document.getElementById('counter');
+        counter.innerText = formattedCount;
+        updateCounterStyle(formattedCount.length);
 
-        p.style.left = x - size / 2 + 'px';
-        p.style.top = y - size / 2 + 'px';
+        document.getElementById('multiplier-val').innerText = 'x' + formatNumber(clickMultiplier);
+        document.getElementById('upgrade-cost-val').innerText = formatNumber(upgradeCost);
 
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 80 + 40;
-        const mx = Math.cos(angle) * speed;
-        const my = Math.sin(angle) * speed;
-
-        document.body.appendChild(p);
-
-        requestAnimationFrame(() => {
-            p.style.transform = `translate(${mx}px, ${my}px) scale(0)`;
-            p.style.opacity = '0';
-        });
-
-        setTimeout(() => p.remove(), 600);
+        if (window.javaApp) {
+            window.javaApp.logClick(count);
+        }
+    } else {
+        alert("Недостаточно кликов! Нужно: " + formatNumber(upgradeCost));
     }
 }
+
