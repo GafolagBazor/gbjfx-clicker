@@ -1,5 +1,8 @@
 #include <windows.h>
+#include <wininet.h>
+
 #include <string>
+#pragma comment(lib, "wininet.lib")
 
 bool fileExists(const std::string& path) {
     DWORD attr = GetFileAttributesA(path.c_str());
@@ -41,8 +44,42 @@ void runSystemCmd(const std::string& cmd) {
     delete[] cmdBuffer;
 }
 
+std::wstring GetLatestVersionFromServer(const std::wstring& urlStr) {
+    std::wstring latestVersion = L"";
+    HINTERNET hInternet = InternetOpenW(L"GafBazUpdater", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
+    if (hInternet) {
+        HINTERNET hUrl = InternetOpenUrlW(hInternet, urlStr.c_str(), NULL, 0, INTERNET_FLAG_RELOAD, 0);
+        if (hUrl) {
+            char buffer[64] = { 0 };
+            DWORD bytesRead = 0;
+            if (InternetReadFile(hUrl, buffer, sizeof(buffer) - 1, &bytesRead) && bytesRead > 0) {
+                std::string resStr(buffer, bytesRead);
+                resStr.erase(resStr.find_last_not_of(" \n\r\t") + 1);
+                latestVersion = std::wstring(resStr.begin(), resStr.end());
+            }
+            InternetCloseHandle(hUrl);
+        }
+        InternetCloseHandle(hInternet);
+    }
+    return latestVersion;
+}
+
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     std::string javaPath = "C:/Program Files/Eclipse Adoptium/jdk-25.0.4.101-hotspot/bin/javaw.exe";
+    const std::wstring CURRENT_VERSION = L"v1.2";
+    const std::wstring VERSION_URL = std::wstring(L"https://raw.githubusercontent.com/GafolagBazor/gbjfx-clicker/main/ver/cVer.txt");
+    const std::wstring RELEASE_URL = std::wstring(L"https://github.com/GafolagBazor/gbjfx-clicker/releases/latest");
+
+    std::wstring latestVer = GetLatestVersionFromServer(VERSION_URL);
+    if (!latestVer.empty() && latestVer != CURRENT_VERSION) {
+        std::wstring msg = L"Найдена более новая версия (" + latestVer + L"), а вы используете " + CURRENT_VERSION + L". Хотите установить новую версию?";
+        int response = MessageBoxW(NULL, msg.c_str(), L"Обновление системы", MB_YESNO | MB_ICONINFORMATION | MB_SYSTEMMODAL);
+        if (response == IDYES) {
+            ShellExecuteW(NULL, L"open", RELEASE_URL.c_str(), NULL, NULL, SW_SHOWNORMAL);
+            return 0;
+        }
+    }
 
     if (!fileExists(javaPath)) {
         if (fileExists("C:/Program Files/Java/jdk-25/bin/javaw.exe")) {
