@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'ru.GafolagBazor'
+version = '1.2'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation fileTree(dir: 'libs', include: ['**/*.jar'])
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': 'ru.GafolagBazor.Run')
+    }
+}
+
+
+javafx {
+    version = "25"
+    modules = [ 'javafx.controls', 'javafx.web']
+}
+
+tasks.register('runProgram', JavaExec) {
+    group = 'runs'
+    description = 'Run this program.'
+
+    mainClass = 'ru.GafolagBazor.Run'
+    classpath = sourceSets.main.runtimeClasspath
+
+    jvmArgs = [
+            '-Dfile.encoding=UTF-8',
+            '-Dconsole.encoding=UTF-8',
+            '--enable-native-access=ALL-UNNAMED'
+    ]
+}
