@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.LinkedHashMap;
+import java.math.BigInteger;
 
 @SuppressWarnings("removal")
 public class App extends Application {
@@ -31,7 +32,7 @@ public class App extends Application {
             : new File(System.getProperty("user.dir") + File.separator + "assets" + File.separator + "clicks" + File.separator + "clicks.json");
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SS");
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private final Type mapType = new TypeToken<LinkedHashMap<String, Integer>>() {}.getType();
+    private final Type mapType = new TypeToken<LinkedHashMap<String, BigInteger>>() {}.getType();
     private final String sessionKey = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SS"));
 
     @Override
@@ -44,7 +45,7 @@ public class App extends Application {
         String historyJson = "{}";
         if (jsonFile.exists() && jsonFile.length() > 4) {
             try (FileReader reader = new FileReader(jsonFile, StandardCharsets.UTF_8)) {
-                LinkedHashMap<String, Integer> existingData = gson.fromJson(reader, mapType);
+                LinkedHashMap<String, BigInteger> existingData = gson.fromJson(reader, mapType);
                 if (existingData != null) {
                     historyJson = gson.toJson(existingData);
                 }
@@ -81,14 +82,15 @@ public class App extends Application {
         }
 
         System.out.println("[GBJFX (App)\\INFO] Creating window...\n");
-        Scene scene = new Scene(webView, 1280, 720);
+        Scene scene = new Scene(webView, 1400, 790);
         primaryStage.setTitle("GafBazJavaFX (кликер)");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    public void logClick(int count) {
-        LinkedHashMap<String, Integer> rootMap = new LinkedHashMap<>();
+    public void logClick(String countStr) {
+        BigInteger count = new BigInteger(countStr);
+        LinkedHashMap<String, BigInteger> rootMap = new LinkedHashMap<>();
 
         File parentDir = jsonFile.getParentFile();
         if (parentDir != null && !parentDir.exists()) {
@@ -97,7 +99,7 @@ public class App extends Application {
 
         if (jsonFile.exists() && jsonFile.length() > 4) {
             try (FileReader reader = new FileReader(jsonFile, StandardCharsets.UTF_8)) {
-                LinkedHashMap<String, Integer> existingData = gson.fromJson(reader, mapType);
+                LinkedHashMap<String, BigInteger> existingData = gson.fromJson(reader, mapType);
                 if (existingData != null) {
                     rootMap.putAll(existingData);
                 }
