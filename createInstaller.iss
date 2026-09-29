@@ -1,13 +1,13 @@
 [Setup]
 AppName=GafBazJavaFX Clicker
-AppVersion=1.2
+AppVersion=1.3
 DefaultDirName={localappdata}\Programs\GafBazClicker
 DefaultGroupName=GafBazJavaFX Clicker
 UninstallDisplayIcon={app}\clicker.exe
 Compression=lzma2/max
 SolidCompression=yes
 OutputDir=D:\VSCode\234\outp
-OutputBaseFilename=GafBazClickerSetup-1.2
+OutputBaseFilename=GafBazClickerSetup-1.3
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 SetupIconFile=D:\VSCode\234\icon.ico
