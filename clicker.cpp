@@ -67,7 +67,7 @@ std::wstring GetLatestVersionFromServer(const std::wstring& urlStr) {
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     std::string javaPath = "C:/Program Files/Eclipse Adoptium/jdk-25.0.4.101-hotspot/bin/javaw.exe";
-    const std::wstring CURRENT_VERSION = L"v1.2";
+    const std::wstring CURRENT_VERSION = L"v1.3";
     const std::wstring VERSION_URL = std::wstring(L"https://raw.githubusercontent.com/GafolagBazor/gbjfx-clicker/main/ver/cVer.txt");
     const std::wstring RELEASE_URL = std::wstring(L"https://github.com/GafolagBazor/gbjfx-clicker/releases/latest");
 
