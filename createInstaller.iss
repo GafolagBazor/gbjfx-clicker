@@ -1,13 +1,13 @@
 [Setup]
 AppName=GafBazJavaFX Clicker
-AppVersion=1.0
+AppVersion=1.2
 DefaultDirName={localappdata}\Programs\GafBazClicker
 DefaultGroupName=GafBazJavaFX Clicker
 UninstallDisplayIcon={app}\clicker.exe
 Compression=lzma2/max
 SolidCompression=yes
 OutputDir=D:\VSCode\234\outp
-OutputBaseFilename=GafBazClickerSetup-1.1
+OutputBaseFilename=GafBazClickerSetup-1.2
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 SetupIconFile=D:\VSCode\234\icon.ico
@@ -44,4 +44,4 @@ Name: "{group}\GafBazJavaFX Clicker"; Filename: "{app}\clicker.exe"
 Name: "{autodesktop}\GafBazJavaFX Clicker"; Filename: "{app}\clicker.exe"
 
 [Run]
-Filename: "{app}\clicker.exe"; Description: "Запустить Кликер"; Flags: postinstall nowait skipifsilent
+Filename: "{app}\clicker.exe"; Description: "Запустить кликер?"; Flags: postinstall nowait skipifsilent
