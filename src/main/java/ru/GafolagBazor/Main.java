@@ -19,7 +19,7 @@ public class Main extends Application {
         clickLogger = new ClickLogger(jsonManager);
         webViewManager = new WebViewManager();
         idleProgress = new IdleProgress(clickLogger, webViewManager);
-        jsConnect = new JSconnect(clickLogger, idleProgress);
+        jsConnect = new JSconnect(clickLogger, idleProgress, jsonManager);
 
         System.out.println("[GBJFX (Main)\\INFO] Reading json...");
         String historyJson = jsonManager.readHistory();
@@ -32,7 +32,7 @@ public class Main extends Application {
             primaryStage.getIcons().add(new Image(iconUrl.toExternalForm()));
         }
 
-        System.out.println("[GBJFX (Main)\\INFO] Creating window...\n");
+        System.out.println("[GBJFX (Main)\\INFO] Creating window...");
         Scene scene = new Scene(webViewManager.getWebView(), 1550, 940);
         primaryStage.setTitle("GafBazJavaFX (кликер)");
         primaryStage.setScene(scene);

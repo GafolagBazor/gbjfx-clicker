@@ -9,6 +9,9 @@ public class ClickLogger {
     private final String sessionKey;
     private BigInteger currentCount = BigInteger.ZERO;
 
+    public static void out() {
+        System.out.println("[GBJFX (ClickLogger)\\INFO] Click logger enabled!");
+    }
     public ClickLogger(JSON jsonManager) {
         this.jsonManager = jsonManager;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SS");

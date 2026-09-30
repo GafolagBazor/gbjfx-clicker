@@ -13,14 +13,14 @@ public class WebViewManager {
     private final WebEngine engine;
 
     public WebViewManager() {
-        System.out.println("[GBJFX (App)\\INFO] Enabling WebView...");
+        System.out.println("[GBJFX (WVM)\\INFO] Enabling WebView...");
         this.webView = new WebView();
         this.webView.setContextMenuEnabled(false);
         this.engine = webView.getEngine();
     }
 
     public void initWebView(JSconnect jsConnect, String historyJson) {
-        System.out.println("[GBJFX (App)\\INFO] Connecting to JavaScript...");
+        System.out.println("[GBJFX (WVM)\\INFO] Connecting to JavaScript...");
         String base64History = Base64.getEncoder().encodeToString(historyJson.getBytes(StandardCharsets.UTF_8));
 
         engine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
@@ -29,7 +29,7 @@ public class WebViewManager {
             }
         });
 
-        System.out.println("[GBJFX (App)\\INFO] Connecting to HTML for WebView...");
+        System.out.println("[GBJFX (WVM)\\INFO] Connecting to HTML for WebView...");
         URL url = getClass().getResource("/assets/web/html.html");
         if (url != null) {
             engine.load(url.toExternalForm());
