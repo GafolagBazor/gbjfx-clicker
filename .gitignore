@@ -7,4 +7,6 @@ build/
 *.exe
 clicker/javaJar/
 ver/
-gbjfxcwres/
+LICENSE
+README.md
+.github/
