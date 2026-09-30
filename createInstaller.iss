@@ -1,13 +1,13 @@
 [Setup]
-AppName=GafBazJavaFX Clicker
-AppVersion=1.3
+AppName=GafBazJavaFX (кликер)
+AppVersion=1.4
 DefaultDirName={localappdata}\Programs\GafBazClicker
 DefaultGroupName=GafBazJavaFX Clicker
 UninstallDisplayIcon={app}\clicker.exe
 Compression=lzma2/max
 SolidCompression=yes
 OutputDir=D:\VSCode\234\outp
-OutputBaseFilename=GafBazClickerSetup-1.3
+OutputBaseFilename=GafBazClickerSetup-1.4
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 SetupIconFile=D:\VSCode\234\icon.ico
@@ -32,9 +32,6 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 
-[Dirs]
-Name: "{app}\assets\clicks"
-
 [Files]
 Source: "D:\VSCode\234\clicker.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\VSCode\234\clicker\javaJar\clicker.jar"; DestDir: "{app}\clicker\javaJar"; Flags: ignoreversion
@@ -44,4 +41,4 @@ Name: "{group}\GafBazJavaFX Clicker"; Filename: "{app}\clicker.exe"
 Name: "{autodesktop}\GafBazJavaFX Clicker"; Filename: "{app}\clicker.exe"
 
 [Run]
-Filename: "{app}\clicker.exe"; Description: "Запустить кликер?"; Flags: postinstall nowait skipifsilent
+Filename: "{app}\clicker.exe"; Description: "Запустить GafBazJavaFX (кликер)"; Flags: postinstall nowait skipifsilent
